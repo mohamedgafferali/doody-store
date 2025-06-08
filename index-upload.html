@@ -1,0 +1,55 @@
+
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>إضافة منتج مع صورة مرفوعة</title>
+</head>
+<body>
+  <h2>إضافة منتج مع صورة من جهازك</h2>
+  <input type="text" id="name" placeholder="اسم المنتج"><br>
+  <input type="number" id="price" placeholder="السعر"><br>
+  <input type="text" id="tracking" placeholder="رقم التتبع (اختياري)"><br>
+  <input type="file" id="image" accept="image/*"><br>
+  <button onclick="addProduct()">إضافة المنتج</button>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+    import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBeQ08lRIJLHCnhAlHL-32g6hYPPenm6BM",
+      authDomain: "doody-store.firebaseapp.com",
+      projectId: "doody-store",
+      storageBucket: "doody-store.firebasestorage.app",
+      messagingSenderId: "372553101001",
+      appId: "1:372553101001:web:ff92bdbd60e636fb106718",
+      measurementId: "G-J8MX415W2Q"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const storage = getStorage(app);
+
+    window.addProduct = async function () {
+      const name = document.getElementById("name").value;
+      const price = document.getElementById("price").value;
+      const tracking = document.getElementById("tracking").value;
+      const imageFile = document.getElementById("image").files[0];
+
+      let imageURL = "";
+
+      if (imageFile) {
+        const storageRef = ref(storage, 'product-images/' + imageFile.name);
+        await uploadBytes(storageRef, imageFile);
+        imageURL = await getDownloadURL(storageRef);
+      }
+
+      const product = { name, price, tracking, image: imageURL };
+      await addDoc(collection(db, "products"), product);
+      alert("تمت إضافة المنتج!");
+    };
+  </script>
+</body>
+</html>
