@@ -1,0 +1,78 @@
+
+body {
+  font-family: sans-serif;
+  background: #fff;
+  margin: 0;
+  direction: rtl;
+}
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: orange;
+  padding: 10px;
+  color: white;
+}
+.logo {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+header input {
+  flex: 1;
+  margin: 0 10px;
+  padding: 5px;
+}
+.whatsapp-btn {
+  font-size: 1.5em;
+  color: white;
+  text-decoration: none;
+}
+main {
+  display: flex;
+  padding: 10px;
+}
+aside {
+  width: 200px;
+}
+aside ul {
+  list-style: none;
+  padding: 0;
+}
+aside ul li {
+  margin: 10px 0;
+  cursor: pointer;
+}
+.main-banner img {
+  width: 100%;
+  max-height: 200px;
+  object-fit: cover;
+}
+.products {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  padding: 10px;
+}
+.product {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: center;
+}
+.product img {
+  width: 100%;
+  height: auto;
+}
+.buy {
+  display: block;
+  margin-top: 10px;
+  background: green;
+  color: white;
+  padding: 5px;
+  text-decoration: none;
+}
+footer {
+  text-align: center;
+  background: #eee;
+  padding: 10px;
+  margin-top: 20px;
+}
