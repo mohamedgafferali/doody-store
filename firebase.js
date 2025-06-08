@@ -1,5 +1,4 @@
 
-// إعداد Firebase وربط Firestore
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import {
   getFirestore,
@@ -21,14 +20,12 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-// دالة إضافة منتج
 window.addProduct = async function () {
   const name = document.getElementById("name").value;
   const price = document.getElementById("price").value;
   const tracking = document.getElementById("tracking").value;
 
   const product = { name, price, tracking };
-
   await addDoc(collection(db, "products"), product);
   alert("تمت الإضافة!");
 };
